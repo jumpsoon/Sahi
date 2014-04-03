@@ -1,0 +1,31 @@
+_include("TEST_FUNCTION.sah");
+function input_all_data($sa_no){
+	set_text_val("Shipment Advice No.:",$sa_no);
+	set_text_val("Short Description:", $sa_no+' Short Desc');
+	set_date_val("Shipment Advice Date:", null);
+	set_dropdown_val("Vendor Incoterm:","FOB");
+	set_dropdown_val("Shipment Method:","Sea");
+	set_textarea_val("Notes / Instructions:",$sa_no+' Notes&Instructions');
+	set_date_val("Ex-factory Date:",null);
+	set_date_val("Shipment Date:",null);
+	set_date_val("Arrival Date:",null);
+	set_date_val("Delivery (In DC/Store) Date:",null);
+	set_dropdown_val("Country of Shipment:","CN-China");
+	set_dropdown_val("Port of Loading:","Chiwan");
+	set_dropdown_val("Country of Destination:","UK-United Kingdom");
+	set_dropdown_val("Port of Discharge:","Liverpool");
+	set_casecade_dropdown_val("Product Category:","GM - GM");
+	set_single_sel_val("Company Name:","Customer Lookup");
+	set_single_sel_val("Company Name:","Vendor Lookup");
+	set_single_sel_val("Company Name:","Forwarder Lookup");
+
+}
+
+login("user10","test");
+open_view("Active","Shipment Advices","Logistics");
+click_menu(" New Shipment Advice","Create");
+var $sa_no = 'Jen_SA-' + new Date().getTime();
+input_all_data($sa_no);
+click_menu("Save & Confirm");
+
+verify_show_message("Document successfully saved and confirmed!");
